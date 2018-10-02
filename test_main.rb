@@ -47,4 +47,15 @@ class TestMain < Test::Unit::TestCase
     assert_equal 10, booking.last_checkout[:price]
     assert_equal 20, booking.checkout_checkin[0][:price]
   end
+
+  def test_booking_has_correct_missions
+    booking = Booking.new(@data_hash["bookings"][0])
+    first_checkin = {:listing_id=>1, :mission_type=>"first_checkin", :date=>"2016-10-10", :price=>20}
+    last_checkout = {:listing_id=>1, :mission_type=>"last_checkout", :date=>"2016-10-15", :price=>10}
+    checkout_checkin = {:listing_id=>1, :mission_type=>"checkout_checkin", :date=>"2016-10-13", :price=>20}
+
+    assert_equal first_checkin, booking.missions[0]
+    assert_equal last_checkout, booking.missions[1]
+    assert_equal checkout_checkin, booking.missions[2]
+  end
 end

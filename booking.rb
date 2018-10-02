@@ -51,4 +51,10 @@ class Booking
       5 * listing_room_number
     end
   end
+
+  def missions
+    missions = Array.new
+    missions << first_checkin << last_checkout
+    missions += checkout_checkin
+  end
 end

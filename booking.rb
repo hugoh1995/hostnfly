@@ -22,4 +22,18 @@ class Booking
   def last_checkout
     mission("last_checkout", @end_date)
   end
+
+  def file
+    JSON.parse(File.read('input.json'))
+  end
+
+  def reservations
+    # Select all reservations for current booking
+    file["reservations"].select { |reservation|
+      reservation["listing_id"] == @listing_id && Date.parse(reservation["start_date"]) >= Date.parse(@start_date) && Date.parse(reservation["end_date"]) <= Date.parse(@end_date) && reservation["end_date"] != @end_date } || []
+  end
+
+  def checkout_checkin
+    reservations.map{|reservation| mission("checkout_checkin", reservation["end_date"]) }
+  end
 end

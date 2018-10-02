@@ -18,4 +18,8 @@ class Booking
   def first_checkin
     mission("first_checkin", @start_date)
   end
+
+  def last_checkout
+    mission("last_checkout", @end_date)
+  end
 end

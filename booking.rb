@@ -12,7 +12,7 @@ class Booking
   end
 
   def mission(type, date)
-    {:listing_id=> @listing_id, :mission_type=> type, :date=> date, :price=> :FIXME}
+    {:listing_id=> @listing_id, :mission_type=> type, :date=> date, :price=> job_price(type)}
   end
 
   def first_checkin
@@ -39,5 +39,16 @@ class Booking
 
   def listing_room_number
     file["listings"].find { |listing| listing["id"] == @listing_id }["num_rooms"]
+  end
+
+  def job_price(type)
+    case type
+    when "first_checkin"
+      10 * listing_room_number
+    when "checkout_checkin"
+      10 * listing_room_number
+    when "last_checkout"
+      5 * listing_room_number
+    end
   end
 end

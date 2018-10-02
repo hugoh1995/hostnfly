@@ -35,4 +35,16 @@ class TestMain < Test::Unit::TestCase
 
     assert_equal 2, booking.listing_room_number
   end
+
+  def test_booking_has_correct_job_prices
+    booking = Booking.new(@data_hash["bookings"][0])
+
+    assert_equal 20, booking.job_price("first_checkin")
+    assert_equal 10, booking.job_price("last_checkout")
+    assert_equal 20, booking.job_price("checkout_checkin")
+
+    assert_equal 20, booking.first_checkin[:price]
+    assert_equal 10, booking.last_checkout[:price]
+    assert_equal 20, booking.checkout_checkin[0][:price]
+  end
 end

@@ -36,4 +36,8 @@ class Booking
   def checkout_checkin
     reservations.map{|reservation| mission("checkout_checkin", reservation["end_date"]) }
   end
+
+  def listing_room_number
+    file["listings"].find { |listing| listing["id"] == @listing_id }["num_rooms"]
+  end
 end

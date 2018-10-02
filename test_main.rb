@@ -29,4 +29,10 @@ class TestMain < Test::Unit::TestCase
     assert_equal "checkout_checkin", booking.checkout_checkin[0][:mission_type]
     assert_equal "2016-10-13", booking.checkout_checkin[0][:date]
   end
+
+  def test_booking_has_correct_room_number
+    booking = Booking.new(@data_hash["bookings"][0])
+
+    assert_equal 2, booking.listing_room_number
+  end
 end
